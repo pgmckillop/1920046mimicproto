@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,20 +12,20 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 /*
- * Title:   MainWindow.cs
+ * Title:   PageDetails.cs
  * Author:  Paul McKillop
  * Date:    22 December 2019
- * Purpose: Container for pages
+ * Purpose: Validate screen data and harvest for processing
  */
 
 namespace SignatureGenerator
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PageDetails.xaml
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class PageDetails : Page
     {
-        public MainWindow()
+        public PageDetails()
         {
             InitializeComponent();
         }
