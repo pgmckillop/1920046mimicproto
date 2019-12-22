@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignatureGenerator", "Signa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PasswordChecker", "PasswordChecker\PasswordChecker.csproj", "{EF77A00B-AF82-4753-B3A9-7DCB00CBDA65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "046VideoBuild", "046VideoBuild\046VideoBuild.csproj", "{3A2EF5DF-F268-4818-8A57-45047E0F4069}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EF77A00B-AF82-4753-B3A9-7DCB00CBDA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF77A00B-AF82-4753-B3A9-7DCB00CBDA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF77A00B-AF82-4753-B3A9-7DCB00CBDA65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2EF5DF-F268-4818-8A57-45047E0F4069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2EF5DF-F268-4818-8A57-45047E0F4069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2EF5DF-F268-4818-8A57-45047E0F4069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2EF5DF-F268-4818-8A57-45047E0F4069}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
