@@ -7,5 +7,5 @@ Using Tim Corey Git guide for Visual Studio integration.
 
 Create an application that creates a user name and checks password strength. Will use WPF based on the newest .Net Core >= 3.0.
 
-Students will modifyt their designs, comments and algorithms to produce original work files.
+Students will modify their designs, comments and algorithms to produce original work files.
 
