@@ -9,7 +9,39 @@
       ShowsNavigationUI="False"
       Title="Details">
 
-    <Grid>
+    <Grid
+        Margin="5">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <!--Title row Index 0 col span 2-->
+                
+
+                <!--Forename row Index 1 col span 2-->
+
+                <!--Surname row Index 2 col span 2-->
+
+                <!--Key row Index 3 col span 2-->
+
+                <!--Separator row Index 4 col span 2-->
+
+                <!--Buttons row Index 5-->
+
+            </Grid>
+        </StackPanel>
         
     </Grid>
 </Page>
