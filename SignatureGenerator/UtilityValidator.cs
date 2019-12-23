@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
+using System.Windows;
 
 /*
  * Title:   UtilityValidator
@@ -27,33 +29,112 @@ namespace SignatureGenerator
         }
 
 
+        #region CharactersAllValid
         /// <summary>
-        /// Check valid characters in whole string
+        /// Check if the characters in user string are all valid
         /// </summary>
         /// <param name="stringToCheck"></param>
         /// <returns></returns>
-        public static bool ValidCharacters(string stringToCheck)
+        public static bool CharactersAllValid(string stringToCheck)
         {
             bool tempBool = true;
 
-            List<string> characterCodes = Lists.CharacterCodes();
+            List<string> validCharacterCodes = Lists.ValidCharacterCodes();
 
-            foreach(char c in stringToCheck)
+            stringToCheck.ToCharArray();
+
+            int stringLength = stringToCheck.Length;
+
+            for (int i = 0; i < stringLength; i++)
             {
-                int code = (int)c;
-                string codeString = c.ToString();
-                
-                if (!Lists.StringFound(characterCodes, codeString))
+                if (!Lists.StringFound(validCharacterCodes, ((int)stringToCheck[i]).ToString()))
                 {
                     tempBool = false;
-                    break;
                 }
             }
 
             return tempBool;
+        }
+        #endregion
+
+        #region GetInvalidCharacter
+        /// <summary>
+        /// Error infomation of invalid character userstring data
+        /// </summary>
+        /// <param name="stringToCheck"></param>
+        /// <returns></returns>
+        public static InvalidCharacter GetInvalidCharacter(string stringToCheck)
+        {
+
+            var invalidCharacter = new InvalidCharacter();
+
+            List<string> validCharacterCodes = Lists.ValidCharacterCodes();
+
+            stringToCheck.ToCharArray();
+
+            int stringLength = stringToCheck.Length;
+
+            for (int i = 0; i < stringLength; i++)
+            {
+                if (!Lists.StringFound(validCharacterCodes, ((int)stringToCheck[i]).ToString()))
+                {
+                    invalidCharacter.Character = stringToCheck[i].ToString();
+                    invalidCharacter.Position = i + 1;
+                    break;
+                }
+            }
+
+            return invalidCharacter;
+        }
+        #endregion
+
+
+        
+        public static int CurrentLetterScore(string letterToCheck)
+        {
+            string path = (@"E:\ascii.txt");
+            var tempScore = 0;
+
+            DataTable characterData = new DataTable();
+
+            characterData = UtilityCharacterDb.GetCharacterData(path);
+
+            foreach (DataRow row in characterData.Rows)
+            {
+                var currentCharacter = new Character
+                {
+                    Code = row.Field<string>(0),
+                    Score = row.Field<string>(1)
+                };
+
+                if (currentCharacter.Code == letterToCheck)
+                {
+                    tempScore = Int32.Parse(currentCharacter.Score);
+                }
+
+            }
+
+            return tempScore;
 
         }
+        
+        
+        public static int WholeStringScore(string userstring)
+        {
+            var tempScore = 0;
+            var stringLength = userstring.Length;
 
+            userstring.ToCharArray();
+
+            for (int i = 0; i < stringLength; i++)
+            {
+                tempScore += UtilityValidator.CurrentLetterScore(((int)userstring[i]).ToString());
+            }
+
+            return tempScore;
+        }
+
+        #region InvalidCharacterPosition
         /// <summary>
         /// Get position of first found invalid character
         /// Default if none found 99999
@@ -64,21 +145,24 @@ namespace SignatureGenerator
         {
             int position = 99999;
 
-            List<string> characterCodes = Lists.CharacterCodes();
+            List<string> validCharacterCodes = Lists.ValidCharacterCodes();
 
-            for(int i = 0; i < stringToCheck.Length; i++)
+            stringToCheck.ToCharArray();
+
+            int stringLength = stringToCheck.Length;
+
+            for (int i = 0; i < stringLength; i++)
             {
-                char c = stringToCheck[i];
-                string cString = c.ToString();
-                if (!Lists.StringFound(characterCodes, cString))
+                if (!Lists.StringFound(validCharacterCodes, ((int)stringToCheck[i]).ToString()))
                 {
-                    position = i;
-                    break;
+                    position = i + 1;
                 }
             }
 
+
             return position;
-        }
+        } 
+        #endregion
 
         /// <summary>
         /// Individual character score
@@ -171,7 +255,7 @@ namespace SignatureGenerator
                     outcome = "Medium";
                     break;
                 case int n when (n >= 17):
-                    outcome = "String";
+                    outcome = "Strong";
                     break;
                 default:
                     outcome = "Invalid";

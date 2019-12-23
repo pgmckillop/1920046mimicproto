@@ -11,7 +11,7 @@ using System.Text;
 
 namespace SignatureGenerator
 {
-    public class PersonUser
+    public class PersonUser : Person
     {
         // -- Key length requirement as an integer
         private int keyLowerLimit;

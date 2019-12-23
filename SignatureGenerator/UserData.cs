@@ -23,5 +23,25 @@ namespace SignatureGenerator
         public string StrengthGradeLong { get; set; }
         
 
+        public static string SummaryDataDisplay(UserData user)
+        {
+            var sb = new StringBuilder();
+
+            sb.Append("The user data is as follows: ").AppendLine().AppendLine();
+            sb.Append("Forename: ").Append(user.Forename).AppendLine();
+            sb.Append("Surname: ").Append(user.Surname).AppendLine();
+            sb.Append("Username: ").Append(user.Username).AppendLine();
+            sb.AppendLine();
+            sb.Append("Original Key: ").Append(user.UserStringOriginal).AppendLine();
+            sb.Append("Encrypted: ").Append(user.UserStringReversed).AppendLine();
+            sb.AppendLine();
+            sb.Append("Key strength: ").Append(user.Score.ToString()).AppendLine();
+            sb.Append("Strength Grade: ").Append(user.StrengthGradeLong).AppendLine();
+            sb.AppendLine().AppendLine();
+
+            return sb.ToString();
+
+        }
+
     }
 }

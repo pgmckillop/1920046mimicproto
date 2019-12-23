@@ -28,17 +28,93 @@
                 </Grid.ColumnDefinitions>
                 
                 <!--Title row Index 0 col span 2-->
-                
+                <StackPanel
+                    Grid.ColumnSpan="2">
+                    <TextBlock
+                        Style="{StaticResource PageHeaderStyle}">
+                        Enter User Data
+                    </TextBlock>
+                </StackPanel>
 
                 <!--Forename row Index 1 col span 2-->
-
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Margin="0 10"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        Style="{StaticResource ControlLabelStyle}">
+                        Forename
+                    </TextBlock>
+                    <TextBox
+                        Style="{StaticResource ValueTextBox}"
+                        x:Name="ForenameTextBox">
+                        
+                    </TextBox>
+                </StackPanel>
+                    
                 <!--Surname row Index 2 col span 2-->
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Margin="0 10"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        Style="{StaticResource ControlLabelStyle}">
+                        Surname
+                    </TextBlock>
+                    <TextBox
+                        Style="{StaticResource ValueTextBox}"
+                        x:Name="SurnameTextBox">
 
+                    </TextBox>
+                </StackPanel>
                 <!--Key row Index 3 col span 2-->
+                <StackPanel
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Grid.Column="0"
+                    Margin="0 10"
+                    VerticalAlignment="Center">
+                    <TextBlock
+                        Style="{StaticResource ControlLabelStyle}">
+                        Key string
+                    </TextBlock>
+                    <TextBox
+                        Style="{StaticResource ValueTextBox}"
+                        x:Name="UserStringTextBox">
+
+                    </TextBox>
+                </StackPanel>
 
                 <!--Separator row Index 4 col span 2-->
 
                 <!--Buttons row Index 5-->
+                <StackPanel
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Margin="10">
+                    <Button
+                        Style="{StaticResource FormButton}"
+                        x:Name="ClearButton"
+                        Click="ClearButton_Click">
+                        Clear
+                    </Button>
+                </StackPanel>
+
+                <StackPanel
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="10">
+                    <Button
+                        Style="{StaticResource FormButton}"
+                        x:Name="SummaryButton"
+                        Click="SummaryButton_Click">
+                        Summary
+                    </Button>
+                </StackPanel>
 
             </Grid>
         </StackPanel>

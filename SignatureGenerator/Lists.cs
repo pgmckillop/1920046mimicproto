@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Data;
 using System.Text;
 
 /*
@@ -20,9 +21,75 @@ namespace SignatureGenerator
         /// <returns></returns>
         public static List<Character> Characters()
         {
+            string path = (@"E:\ascii.txt");
+
             List<Character> characters = new List<Character>();
+
+            DataTable characterData = new DataTable();
+
+            characterData = UtilityCharacterDb.GetCharacterData(path);
+
+            foreach (DataRow row in characterData.Rows)
+            {
+                var currentCharacter = new Character
+                {
+                    Code = row.Field<string>(0),
+                    Score = row.Field<string>(1)
+                };
+
+                characters.Add(currentCharacter);
+            }
+            //-- Return the list of codes
+            return characters;
+        }
+
+        #region ValidCharacters as Characters
+        /// <summary>
+        /// ValidCharacters as list<Character></Character>
+        /// </summary>
+        /// <returns></returns>
+        public static List<Character> ValidCharacters()
+        {
+            string path = (@"E:\ascii.txt");
+
+            List<Character> characters = new List<Character>();
+
+            DataTable characterData = new DataTable();
+
+            characterData = UtilityCharacterDb.GetCharacterData(path);
+
+            foreach (DataRow row in characterData.Rows)
+            {
+                var currentCharacter = new Character
+                {
+                    Code = row.Field<string>(0),
+                    Score = row.Field<string>(1)
+                };
+
+                if (currentCharacter.Score != "9")
+                {
+                    characters.Add(currentCharacter);
+                }
+
+            }
+            //-- Return the list of codes
+            return characters;
+        } 
+        #endregion
+
+        #region ValidCharacterCodes (Codes only)
+        /// <summary>
+        /// Valid codes as List<string></string>
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> ValidCharacterCodes()
+        {
+            string path = (@"E:\ascii.txt");
+
+
+            List<string> codes = new List<string>();
             //-- Implement using statement to provide memory management
-            using (StreamReader reader = new StreamReader(UtilityZGlobals.DatabasePath()))
+            using (StreamReader reader = new StreamReader(path))
             {
                 //-- Loop through all and harvest first column into the list
                 while (true)
@@ -41,27 +108,34 @@ namespace SignatureGenerator
                     //-- Initialise a Character oblject to hold data
                     //-- Could use a simple string but demo of OOP process
                     Character character = new Character();
-                    //-- Read code field
-                    character.Code = fields[0];
-                    character.Score = fields[1];
-                    //-- Add the code to the list
-                    characters.Add(character);
+
+                    if (fields[1] != "9")
+                    {
+                        //-- Read code field
+                        character.Code = fields[0];
+                        //-- Add the code to the list
+                        codes.Add(character.Code);
+                    }
                 }
             }
 
             //-- Return the list of codes
-            return characters;
-        }
-        
+            return codes;
+        } 
+        #endregion
+
         /// <summary>
         /// Just Character codes
         /// </summary>
         /// <returns></returns>
         public static List<string> CharacterCodes()
         {
+            string path = (@"E:\ascii.txt");
+
+
             List<string> codes = new List<string>();
             //-- Implement using statement to provide memory management
-            using (StreamReader reader = new StreamReader(UtilityZGlobals.DatabasePath()))
+            using (StreamReader reader = new StreamReader(path))
             {
                 //-- Loop through all and harvest first column into the list
                 while (true)

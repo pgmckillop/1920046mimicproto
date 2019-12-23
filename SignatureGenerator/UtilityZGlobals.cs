@@ -21,7 +21,7 @@ namespace SignatureGenerator
         /// <returns></returns>
         public static string DatabasePath()
         {
-            return "E:\ascii.txt";
+            return "E:\\ascii.txt";
         }
 
         /// <summary>

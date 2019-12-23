@@ -66,7 +66,7 @@ namespace SignatureGenerator
         /// <param name="forename"></param>
         /// <param name="surname"></param>
         /// <returns>string of 2 characters</returns>
-        public static string MakeUsername(string forename, string surname, int lower, int upper)
+        public static string MakeUsername(string forename, string surname)
         {
             //-- holding variable
             string s = string.Empty;
@@ -74,8 +74,8 @@ namespace SignatureGenerator
             try
             {
                 //-- range for random
-                lower = 1000;
-                upper = 9999;
+                var lower = 1000;
+                var upper = 9999;
 
                 //-- string for Trim()
                 string st = forename.Trim();
@@ -96,7 +96,7 @@ namespace SignatureGenerator
                 MessageBox.Show(ex.Message);
             }
 
-            return s;
+            return s.ToLower();
         }
 
     }
