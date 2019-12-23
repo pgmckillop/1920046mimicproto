@@ -13,6 +13,22 @@ namespace SignatureGenerator
 {
     public class Character
     {
+        private string code;
+
+        public string Code
+        {
+            get { return code; }
+            set { code = value; }
+        }
+
+        private string score;
+
+        public string Score
+        {
+            get { return score; }
+            set { score = value; }
+        }
+
 
     }
 }

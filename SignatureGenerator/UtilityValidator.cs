@@ -5,13 +5,181 @@ using System.Text;
 /*
  * Title:   UtilityValidator
  * Author:  Paul McKillop
- * Date:    22 December 2019
+ * Date:    23 December 2019
  * Purpose: Checking and scoring outcomes
  */
 
 namespace SignatureGenerator
-{
+{   
     class UtilityValidator
     {
+        //-- Rules as module-wide variables
+        static int strengthRuleMinimum = UtilityZGlobals.LengthRule();
+
+        /// <summary>
+        /// Check meets length standard
+        /// </summary>
+        /// <param name="myString"></param>
+        /// <returns></returns>
+        public static bool LengthRuleCheck(string myString)
+        {
+            return myString.Length >= strengthRuleMinimum;
+        }
+
+
+        /// <summary>
+        /// Check valid characters in whole string
+        /// </summary>
+        /// <param name="stringToCheck"></param>
+        /// <returns></returns>
+        public static bool ValidCharacters(string stringToCheck)
+        {
+            bool tempBool = true;
+
+            List<string> characterCodes = Lists.CharacterCodes();
+
+            foreach(char c in stringToCheck)
+            {
+                int code = (int)c;
+                string codeString = c.ToString();
+                
+                if (!Lists.StringFound(characterCodes, codeString))
+                {
+                    tempBool = false;
+                    break;
+                }
+            }
+
+            return tempBool;
+
+        }
+
+        /// <summary>
+        /// Get position of first found invalid character
+        /// Default if none found 99999
+        /// </summary>
+        /// <param name="stringToCheck"></param>
+        /// <returns></returns>
+        public static int InvalidCharacterPosition(string stringToCheck)
+        {
+            int position = 99999;
+
+            List<string> characterCodes = Lists.CharacterCodes();
+
+            for(int i = 0; i < stringToCheck.Length; i++)
+            {
+                char c = stringToCheck[i];
+                string cString = c.ToString();
+                if (!Lists.StringFound(characterCodes, cString))
+                {
+                    position = i;
+                    break;
+                }
+            }
+
+            return position;
+        }
+
+        /// <summary>
+        /// Individual character score
+        /// </summary>
+        /// <param name="characterCode"></param>
+        /// <returns></returns>
+        public static int CharacterScore(string characterCode)
+        {
+            int charScore = 0;
+
+            List<Character> characters = Lists.Characters();
+            foreach(Character character in characters)
+            {
+                if(character.Code == characterCode)
+                {
+                    charScore = Int32.Parse(character.Score);
+                    return charScore;
+                }
+            }
+
+            return charScore;
+        }
+        
+        /// <summary>
+        /// Strength score for whole string as integer
+        /// </summary>
+        /// <param name="stringToCheck"></param>
+        /// <returns></returns>
+        public static int StringScore(string stringToCheck)
+        {
+            int currentScore = 0;
+
+            foreach(char c in stringToCheck)
+            {
+                currentScore += CharacterScore(c.ToString());
+            }
+
+            return currentScore;
+        }
+
+        /// <summary>
+        /// Grade of string as single letter string
+        /// </summary>
+        /// <param name="strengthScore"></param>
+        /// <returns></returns>
+        public static string StrengthGradeShort(int strengthScore)
+        {
+            string outcome;
+
+            switch (strengthScore)
+            {
+                case int n when (n <= 7):
+                    outcome = "U";
+                    break;
+                case int n when (n >= 8 && n <= 10):
+                    outcome = "W";
+                    break;
+                case int n when (n >= 11 && n <= 16):
+                    outcome = "M";
+                    break;
+                case int n when (n >= 17):
+                    outcome = "S";
+                    break;
+                default:
+                    outcome = "I";
+                    break;
+            }
+
+            return outcome;
+        }
+
+        /// <summary>
+        /// Grade of string as full string
+        /// </summary>
+        /// <param name="strengthScore"></param>
+        /// <returns></returns>
+        public static  string StrengthGradeLong(int strengthScore)
+        {
+            string outcome;
+
+            switch (strengthScore)
+            {
+                case int n when (n <= 7):
+                    outcome = "Unnacceptable";
+                    break;
+                case int n when (n >= 8 && n <= 10):
+                    outcome = "Weak";
+                    break;
+                case int n when (n >= 11 && n <= 16):
+                    outcome = "Medium";
+                    break;
+                case int n when (n >= 17):
+                    outcome = "String";
+                    break;
+                default:
+                    outcome = "Invalid";
+                    break;
+            }
+
+
+            return outcome;
+        }
     }
 }
