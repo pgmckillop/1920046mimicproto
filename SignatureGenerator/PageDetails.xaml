@@ -92,8 +92,9 @@
                 <!--Separator row Index 4 col span 2-->
 
                 <!--Buttons row Index 5-->
+                <!--Column 0-->
                 <StackPanel
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="0"
                     Margin="10">
                     <Button
@@ -103,9 +104,9 @@
                         Clear
                     </Button>
                 </StackPanel>
-
+                <!--Column 1-->
                 <StackPanel
-                    Grid.Row="4"
+                    Grid.Row="5"
                     Grid.Column="1"
                     Margin="10">
                     <Button
