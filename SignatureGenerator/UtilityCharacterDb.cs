@@ -27,7 +27,7 @@ namespace SignatureGenerator
             //-- This has to be done outside the try .. catch construct to allow scope access
             DataTable characterData = new DataTable();
 
-            //-- try to populatye the DataTable variable
+            //-- try to populate the DataTable variable
             try
             {
                 // -- Populate the DataTable with vakues from the text file

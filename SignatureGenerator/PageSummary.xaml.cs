@@ -20,14 +20,55 @@ using System.Windows.Shapes;
 
 namespace SignatureGenerator
 {
+    #region Page constructor
     /// <summary>
     /// Interaction logic for PageSummary.xaml
     /// </summary>
     public partial class PageSummary : Page
     {
-        public PageSummary()
+        UserData summary = new UserData();
+
+        /// <summary>
+        /// Page constructor with data passed from PageDetails
+        /// </summary>
+        /// <param name="summaryPassed"></param>
+        public PageSummary(UserData summaryPassed)
         {
             InitializeComponent();
+            summary = summaryPassed;
+
+            var sb = new StringBuilder();
+
+            sb.AppendLine("Data summary").AppendLine();
+            sb.Append("Forename: ").Append("\t").AppendLine(summary.Forename);
+            sb.Append("Surname: ").Append("\t").AppendLine(summary.Surname);
+            sb.Append("Username: ").Append("\t").AppendLine(summary.Username);
+            sb.AppendLine();
+            sb.Append("Original: ").Append("\t").Append("\t").AppendLine(summary.UserStringOriginal);
+            sb.Append("Encrypted: ").Append("\t").AppendLine(summary.UserStringReversed);
+            sb.AppendLine();
+            sb.Append("Score: ").Append("\t").Append("\t").AppendLine(summary.Score.ToString());
+            sb.Append("Strength: ").Append("\t").Append("\t").AppendLine(summary.StrengthGradeLong);
+
+            var showString = sb.ToString();
+
+            SummaryTextBlock.Text = showString;
+
         }
+        #endregion
+
+        #region Page Navigation and app exit
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            var pageDetails = new PageDetails();
+            this.NavigationService.Navigate(pageDetails);
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        } 
+        #endregion
     }
 }

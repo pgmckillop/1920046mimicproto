@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace _046VideoBuild
+namespace SignatureGeneratorV
 {
     /// <summary>
     /// Interaction logic for App.xaml

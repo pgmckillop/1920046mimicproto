@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignatureGenerator", "Signa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PasswordChecker", "PasswordChecker\PasswordChecker.csproj", "{EF77A00B-AF82-4753-B3A9-7DCB00CBDA65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "046VideoBuild", "046VideoBuild\046VideoBuild.csproj", "{3A2EF5DF-F268-4818-8A57-45047E0F4069}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignatureGeneratorV", "046VideoBuild\SignatureGeneratorV.csproj", "{3A2EF5DF-F268-4818-8A57-45047E0F4069}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestBed", "TestBed\TestBed.csproj", "{BA3EF477-0E7B-4E59-BAF5-5C8B4F7D2475}"
 EndProject

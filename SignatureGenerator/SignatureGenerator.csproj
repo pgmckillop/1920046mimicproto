@@ -4,6 +4,13 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Authors>Paul McKillop</Authors>
+    <Company>Paul McKillop</Company>
+    <Product>Signature Generator</Product>
+    <Description>Application for the 1920 046 Synoptic build.</Description>
+    <Copyright>1920 Paul McKillop</Copyright>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
+    <PackageTags>C#, WPF, TechBac</PackageTags>
   </PropertyGroup>
 
 </Project>

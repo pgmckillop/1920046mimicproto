@@ -28,47 +28,68 @@ namespace SignatureGenerator
     {
         
         //-- Handler variables. Global in the module
-        private string forename = string.Empty;
-        private string surname = string.Empty;
-        private string userstring = string.Empty;
-        bool forenameData = false;
-        bool surnameData = false;
-        bool userStringData = false;
+        internal string forename = string.Empty;
+        internal string surname = string.Empty;
+        internal string userstring = string.Empty;
+        
+        //-- Validity tracking
+        internal bool forenameData;
+        internal bool surnameData;
+        internal bool userStringData;
+        internal bool stringValid = false;
         
         //-- Demo of the use of inherited child class
         private PersonUser personUser = new PersonUser();
         
+        //-- Page constructor default
         public PageDetails()
         {
             InitializeComponent();
         }
 
+        #region ClearButton click
+        //-- Clear text controls: Calls local method
         private void ClearButton_Click(object sender, RoutedEventArgs e)
         {
             ClearControls();
         }
 
+        #endregion
+
+
+        #region SummaryButton Click: Process
+        /// <summary>
+        /// Harvest data and validate
+        /// If valid, process for required use
+        /// Go to summary page passing all the data in the navigation method
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SummaryButton_Click(object sender, RoutedEventArgs e)
         {
             //-- DEBUG MessageBox.Show("Summary button clicked");
             //-- DEBUG MessageBox.Show(HarvestData().ToString());
 
+            forenameData = false;
+
             if (HarvestData())
             {
-                
+
                 //-- Implementation of child class inherited from Person
                 personUser.Forename = forename;
                 personUser.Surname = surname;
                 personUser.KeyLowerLimit = UtilityZGlobals.LengthRule();
 
-
+                var userData = new UserData();
 
                 if (UtilityValidator.CharactersAllValid(userstring))
                 {
+                    stringValid = true;
+
                     MessageBox.Show("Characters are all valid");
                     //-- The userstring can be processed
 
-                    var userData = new UserData
+                    userData = new UserData
                     {
                         Forename = forename,
                         Surname = surname,
@@ -83,6 +104,8 @@ namespace SignatureGenerator
                 }
                 else
                 {
+                    stringValid = false;
+
                     var invalidCharacter = UtilityValidator.GetInvalidCharacter(userstring);
                     MessageBox.Show("Invalid character " + invalidCharacter.Character + " at position " + invalidCharacter.Position);
                     //-- DEBUG MessageBox.Show("Invalid characters");
@@ -92,9 +115,34 @@ namespace SignatureGenerator
             {
                 MessageBox.Show("There was a problem with the data. Follow message instructions");
             }
-        }
+
+            var userDataToPass = new UserData
+            {
+                Forename = forename,
+                Surname = surname,
+                Username = UtilityString.MakeUsername(forename, surname),
+                UserStringOriginal = userstring,
+                UserStringReversed = UtilityString.ReverseString(userstring),
+                Score = UtilityValidator.WholeStringScore(userstring),
+                StrengthGradeLong = UtilityValidator.StrengthGradeLong(UtilityValidator.WholeStringScore(userstring))
+            };
+
+            if (stringValid)
+            {
+                var pageSummary = new PageSummary(userDataToPass);
+                this.NavigationService.Navigate(pageSummary);
+            }
+            else
+            {
+                MessageBox.Show("Cannot show summary with invalid data");
+            }
 
 
+        } 
+        #endregion
+
+
+        #region ClearControls: clear text controls
         /// <summary>
         /// Clear controls and set focus to ForenameTextBox
         /// </summary>
@@ -105,24 +153,28 @@ namespace SignatureGenerator
             UserStringTextBox.Text = "";
 
             ForenameTextBox.Focus();
-        }
+        } 
+        #endregion
 
+
+        #region Harvest form data
         /// <summary>
         /// Get data from controls
         /// </summary>
         private bool HarvestData()
         {
-            
+            forenameData = false;
+
             //-- Object to hold data
             FormData formData = new FormData();
             int dataPresent = 0;
             bool allData = false;
-            
+
             // Forename
-            if(ForenameTextBox.Text != "")
+            if (ForenameTextBox.Text != "")
             {
                 formData.Forename = ForenameTextBox.Text;
-                this.forenameData = true;
+                forenameData = true;
                 dataPresent++;
             }
             else
@@ -132,7 +184,7 @@ namespace SignatureGenerator
             }
 
             // Surname
-            if(SurnameTextBox.Text != "")
+            if (SurnameTextBox.Text != "")
             {
                 formData.Surname = SurnameTextBox.Text;
                 surnameData = true;
@@ -145,12 +197,12 @@ namespace SignatureGenerator
             }
 
             // User string
-            if(UserStringTextBox.Text != "")
+            if (UserStringTextBox.Text != "")
             {
                 //-- get what's in the text box
                 formData.UserString = UserStringTextBox.Text;
                 //-- Length check
-                if(formData.UserString.Length >= UtilityZGlobals.LengthRule())
+                if (formData.UserString.Length >= UtilityZGlobals.LengthRule())
                 {
                     userStringData = true;
                     dataPresent++;
@@ -161,7 +213,7 @@ namespace SignatureGenerator
                     MessageBox.Show("The user entered string does not meet length rule");
                     userStringData = false;
                 }
-                
+
             }
             else
             {
@@ -169,7 +221,7 @@ namespace SignatureGenerator
                 userStringData = false;
             }
 
-            if(dataPresent == 3)
+            if (dataPresent == 3)
             {
                 //-- All is wonderful
                 forename = formData.Forename;
@@ -185,9 +237,11 @@ namespace SignatureGenerator
             }
 
             return allData;
-        }
-        
-        
+        } 
+        #endregion
+
+
+        #region FormData class
         /// <summary>
         /// Private class for data manipulation during validation and harvest
         /// </summary>
@@ -196,7 +250,8 @@ namespace SignatureGenerator
             public string Forename { get; set; }
             public string Surname { get; set; }
             public string UserString { get; set; }
-        }
+        } 
+        #endregion
 
     }
 }

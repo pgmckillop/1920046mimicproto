@@ -8,7 +8,70 @@
       d:DesignHeight="800" d:DesignWidth="450"
       Title="Summary">
 
-    <Grid>
-        
+    <Grid
+        Margin="5">
+        <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="8*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <!--Title in Row 0-->
+                <StackPanel
+                    Grid.ColumnSpan="2">
+                    <TextBlock
+                        Grid.ColumnSpan="2"
+                        Style="{StaticResource PageHeaderStyle}">
+                        Summary
+                    </TextBlock>
+                </StackPanel>
+                
+                <!--Data Summary in Row Index 1-->
+                <StackPanel
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Margin="5">
+                    <TextBlock
+                        x:Name="SummaryTextBlock"
+                        FontFamily="Calibri"
+                        FontSize="24"
+                        Foreground="Teal"/>
+
+
+                </StackPanel>
+                
+                <!--Buttons in Row index 2-->
+                <!--Back button-->
+                <StackPanel
+                    Grid.Row="2">
+                    <Button
+                        Style="{StaticResource FormButton}"
+                        x:Name="BackButton"
+                        Click="BackButton_Click">
+                        Back
+                    </Button>
+                </StackPanel>
+                
+                <!--Exit Button-->
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.Column="1">
+                    <Button
+                        Style="{StaticResource FormButton}"
+                        x:Name="ExitButton"
+                        Click="ExitButton_Click">
+                        Exit
+                    </Button>
+                </StackPanel>
+                
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

@@ -134,35 +134,38 @@ namespace SignatureGenerator
             return tempScore;
         }
 
-        #region InvalidCharacterPosition
         /// <summary>
-        /// Get position of first found invalid character
-        /// Default if none found 99999
+        /// Grade of string as full string
         /// </summary>
-        /// <param name="stringToCheck"></param>
+        /// <param name="strengthScore"></param>
         /// <returns></returns>
-        public static int InvalidCharacterPosition(string stringToCheck)
+        public static string StrengthGradeLong(int strengthScore)
         {
-            int position = 99999;
+            string outcome;
 
-            List<string> validCharacterCodes = Lists.ValidCharacterCodes();
-
-            stringToCheck.ToCharArray();
-
-            int stringLength = stringToCheck.Length;
-
-            for (int i = 0; i < stringLength; i++)
+            switch (strengthScore)
             {
-                if (!Lists.StringFound(validCharacterCodes, ((int)stringToCheck[i]).ToString()))
-                {
-                    position = i + 1;
-                }
+                case int n when (n <= 7):
+                    outcome = "Unnacceptable";
+                    break;
+                case int n when (n >= 8 && n <= 10):
+                    outcome = "Weak";
+                    break;
+                case int n when (n >= 11 && n <= 16):
+                    outcome = "Medium";
+                    break;
+                case int n when (n >= 17):
+                    outcome = "Strong";
+                    break;
+                default:
+                    outcome = "Invalid";
+                    break;
             }
 
 
-            return position;
-        } 
-        #endregion
+            return outcome;
+        }
+
 
         /// <summary>
         /// Individual character score
@@ -185,7 +188,16 @@ namespace SignatureGenerator
 
             return charScore;
         }
-        
+
+
+
+
+
+        #region Possibly Redundant
+        //-- *******************************************
+        //-- The following may be redundant
+
+
         /// <summary>
         /// Strength score for whole string as integer
         /// </summary>
@@ -195,13 +207,15 @@ namespace SignatureGenerator
         {
             int currentScore = 0;
 
-            foreach(char c in stringToCheck)
+            foreach (char c in stringToCheck)
             {
                 currentScore += CharacterScore(c.ToString());
             }
 
             return currentScore;
         }
+
+
 
         /// <summary>
         /// Grade of string as single letter string
@@ -234,36 +248,37 @@ namespace SignatureGenerator
             return outcome;
         }
 
+        #region InvalidCharacterPosition
         /// <summary>
-        /// Grade of string as full string
+        /// Get position of first found invalid character
+        /// Default if none found 99999
         /// </summary>
-        /// <param name="strengthScore"></param>
+        /// <param name="stringToCheck"></param>
         /// <returns></returns>
-        public static  string StrengthGradeLong(int strengthScore)
+        public static int InvalidCharacterPosition(string stringToCheck)
         {
-            string outcome;
+            int position = 99999;
 
-            switch (strengthScore)
+            List<string> validCharacterCodes = Lists.ValidCharacterCodes();
+
+            stringToCheck.ToCharArray();
+
+            int stringLength = stringToCheck.Length;
+
+            for (int i = 0; i < stringLength; i++)
             {
-                case int n when (n <= 7):
-                    outcome = "Unnacceptable";
-                    break;
-                case int n when (n >= 8 && n <= 10):
-                    outcome = "Weak";
-                    break;
-                case int n when (n >= 11 && n <= 16):
-                    outcome = "Medium";
-                    break;
-                case int n when (n >= 17):
-                    outcome = "Strong";
-                    break;
-                default:
-                    outcome = "Invalid";
-                    break;
+                if (!Lists.StringFound(validCharacterCodes, ((int)stringToCheck[i]).ToString()))
+                {
+                    position = i + 1;
+                }
             }
 
 
-            return outcome;
+            return position;
         }
+        #endregion
+
+        //-- ************************************** 
+        #endregion
     }
 }
