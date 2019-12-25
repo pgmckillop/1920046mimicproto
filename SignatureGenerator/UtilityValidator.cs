@@ -193,92 +193,92 @@ namespace SignatureGenerator
 
 
 
-        #region Possibly Redundant
+        //#region Possibly Redundant
         //-- *******************************************
         //-- The following may be redundant
 
 
-        /// <summary>
-        /// Strength score for whole string as integer
-        /// </summary>
-        /// <param name="stringToCheck"></param>
-        /// <returns></returns>
-        public static int StringScore(string stringToCheck)
-        {
-            int currentScore = 0;
+        ///// <summary>
+        ///// Strength score for whole string as integer
+        ///// </summary>
+        ///// <param name="stringToCheck"></param>
+        ///// <returns></returns>
+        //public static int StringScore(string stringToCheck)
+        //{
+        //    int currentScore = 0;
 
-            foreach (char c in stringToCheck)
-            {
-                currentScore += CharacterScore(c.ToString());
-            }
+        //    foreach (char c in stringToCheck)
+        //    {
+        //        currentScore += CharacterScore(c.ToString());
+        //    }
 
-            return currentScore;
-        }
-
-
-
-        /// <summary>
-        /// Grade of string as single letter string
-        /// </summary>
-        /// <param name="strengthScore"></param>
-        /// <returns></returns>
-        public static string StrengthGradeShort(int strengthScore)
-        {
-            string outcome;
-
-            switch (strengthScore)
-            {
-                case int n when (n <= 7):
-                    outcome = "U";
-                    break;
-                case int n when (n >= 8 && n <= 10):
-                    outcome = "W";
-                    break;
-                case int n when (n >= 11 && n <= 16):
-                    outcome = "M";
-                    break;
-                case int n when (n >= 17):
-                    outcome = "S";
-                    break;
-                default:
-                    outcome = "I";
-                    break;
-            }
-
-            return outcome;
-        }
-
-        #region InvalidCharacterPosition
-        /// <summary>
-        /// Get position of first found invalid character
-        /// Default if none found 99999
-        /// </summary>
-        /// <param name="stringToCheck"></param>
-        /// <returns></returns>
-        public static int InvalidCharacterPosition(string stringToCheck)
-        {
-            int position = 99999;
-
-            List<string> validCharacterCodes = Lists.ValidCharacterCodes();
-
-            stringToCheck.ToCharArray();
-
-            int stringLength = stringToCheck.Length;
-
-            for (int i = 0; i < stringLength; i++)
-            {
-                if (!Lists.StringFound(validCharacterCodes, ((int)stringToCheck[i]).ToString()))
-                {
-                    position = i + 1;
-                }
-            }
+        //    return currentScore;
+        //}
 
 
-            return position;
-        }
-        #endregion
 
-        //-- ************************************** 
-        #endregion
+        ///// <summary>
+        ///// Grade of string as single letter string
+        ///// </summary>
+        ///// <param name="strengthScore"></param>
+        ///// <returns></returns>
+        //public static string StrengthGradeShort(int strengthScore)
+        //{
+        //    string outcome;
+
+        //    switch (strengthScore)
+        //    {
+        //        case int n when (n <= 7):
+        //            outcome = "U";
+        //            break;
+        //        case int n when (n >= 8 && n <= 10):
+        //            outcome = "W";
+        //            break;
+        //        case int n when (n >= 11 && n <= 16):
+        //            outcome = "M";
+        //            break;
+        //        case int n when (n >= 17):
+        //            outcome = "S";
+        //            break;
+        //        default:
+        //            outcome = "I";
+        //            break;
+        //    }
+
+        //    return outcome;
+        //}
+
+        //#region InvalidCharacterPosition
+        ///// <summary>
+        ///// Get position of first found invalid character
+        ///// Default if none found 99999
+        ///// </summary>
+        ///// <param name="stringToCheck"></param>
+        ///// <returns></returns>
+        //public static int InvalidCharacterPosition(string stringToCheck)
+        //{
+        //    int position = 99999;
+
+        //    List<string> validCharacterCodes = Lists.ValidCharacterCodes();
+
+        //    stringToCheck.ToCharArray();
+
+        //    int stringLength = stringToCheck.Length;
+
+        //    for (int i = 0; i < stringLength; i++)
+        //    {
+        //        if (!Lists.StringFound(validCharacterCodes, ((int)stringToCheck[i]).ToString()))
+        //        {
+        //            position = i + 1;
+        //        }
+        //    }
+
+
+        //    return position;
+        //}
+        //#endregion
+
+        ////-- ************************************** 
+        //#endregion
     }
 }

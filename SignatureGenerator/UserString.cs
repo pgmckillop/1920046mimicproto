@@ -12,15 +12,15 @@ namespace SignatureGenerator
 {
     public class UserString
     {
-        public int Length { get; set; }
+        //public int Length { get; set; }
 
-        public int Score { get; set; }
+        //public int Score { get; set; }
 
-        public string GradeShort { get; set; }
+        //public string GradeShort { get; set; }
 
-        public string GradeLong { get; set; }
+        //public string GradeLong { get; set; }
 
-        public string Reversed { get; set; }
+        //public string Reversed { get; set; }
 
     }
 }
